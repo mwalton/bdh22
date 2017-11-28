@@ -33,12 +33,12 @@ query = '''SELECT subject_id, hadm_id, itemid, charttime, value, flag
 
 data = pd.read_sql_query(query, connection)
 
-print "Columns: {}".format(data.head().columns.tolist())
-print "Unique Hospital stays: {}\nUnique Subjects: {}\nUnique Lab Events:{}".format(len(data['hadm_id'].unique()),
+print("Columns: {}".format(data.head().columns.tolist()))
+print("Unique Hospital stays: {}\nUnique Subjects: {}\nUnique Lab Events:{}".format(len(data['hadm_id'].unique()),
                                                                                     len(data['subject_id'].unique()),
-                                                                                    len(data['itemid'].unique()))
+                                                                                    len(data['itemid'].unique())))
 
-print "Max / Min Chart time: {} / {}".format(data['charttime'].max(), data['charttime'].min())
+print("Max / Min Chart time: {} / {}".format(data['charttime'].max(), data['charttime'].min()))
 
 data_grouped = data.sort(['charttime'])[['hadm_id','itemid']].groupby(['hadm_id'])
 labevents = list(data_grouped['itemid'].apply(pd.Series.as_matrix))
@@ -118,7 +118,7 @@ for i, seq in enumerate(labevents):
     for j, v in enumerate(seq):
         X[i, j, vocabulary[v]] = 1
 
-print "Maximum Nuber of events per seq: {}".format(max_len)
+print("Maximum Nuber of events per seq: {}".format(max_len))
 
 latent_dim = 2
 decoder_dim = 32
