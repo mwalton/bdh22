@@ -1,0 +1,713 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{analysis}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{k+kn}{import} \PY{n+nn}{psycopg2}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{collections}
+         \PY{k+kn}{from} \PY{n+nn}{util} \PY{k}{import} \PY{n}{build\PYZus{}sequences}\PY{p}{,} \PY{n}{build\PYZus{}dataset}\PY{p}{,} \PY{n}{to\PYZus{}one\PYZus{}hot}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{layers} \PY{k}{import} \PY{n}{Dense}\PY{p}{,} \PY{n}{Input}
+         \PY{k+kn}{from} \PY{n+nn}{keras}\PY{n+nn}{.}\PY{n+nn}{models} \PY{k}{import} \PY{n}{Model}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{utils} \PY{k}{import} \PY{n}{shuffle}
+         \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{manifold} \PY{k}{import} \PY{n}{TSNE}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{DBSCAN}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{preprocessing} \PY{k}{import} \PY{n}{StandardScaler}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Relavant Tables}\label{relavant-tables}
+
+Procedure timeseries mimic III tables that could be used in critical
+care pathway discovery and modelling
+
+\begin{itemize}
+\tightlist
+\item
+  \href{https://mimic.physionet.org/mimictables/procedures_icd/}{procedures\_icd}:
+  (240,095) Contains ICD procedures for patients, most notably ICD-9
+  procedures
+
+  \begin{itemize}
+  \tightlist
+  \item
+    links to
+    \href{https://mimic.physionet.org/mimictables/d_icd_procedures/}{d\_icd\_procedures}
+    (3,882) on ICD9\_CODE
+  \end{itemize}
+\item
+  \href{https://mimic.physionet.org/mimictables/chartevents/}{chartevents}:
+  (330,712,483) all data for all patients
+\item
+  \href{https://mimic.physionet.org/mimictables/cptevents/}{cptevents}:
+  (573146) Contains current procedural terminology (CPT) codes, which
+  facilitate billing for procedures performed on patients.
+\item
+  \href{https://mimic.physionet.org/mimictables/procedureevents_mv/}{procedureevents\_mv}:
+  (258,066) Contains procedures for patients
+\item
+  \href{https://mimic.physionet.org/mimictables/labevents/}{labevents}:
+  (27,854,055) Contains all laboratory measurements for a given patient,
+  including out patient data.
+\item
+  \href{https://mimic.physionet.org/mimictables/noteevents/}{noteevents}:
+  (2,083,180) Contains all notes for patients.
+\end{itemize}
+
+    \section{PROCEDURES\_ICD Analysis}\label{procedures_icd-analysis}
+
+\subsection{TODO:}\label{todo}
+
+\begin{itemize}
+\tightlist
+\item
+  \sout{mimic queries}
+\item
+  \sout{mapping functions for procedures to one-hot vectors}
+\item
+  \sout{construct skip grams}
+\item
+  \sout{train embedding model}
+\item
+  \sout{TSNE visualization}
+\item
+  \sout{clustering}
+\item
+  clustering metrics (purity / silhouette)
+
+  \begin{itemize}
+  \tightlist
+  \item
+    http://scikit-learn.org/stable/auto\_examples/cluster/plot\_kmeans\_silhouette\_analysis.html\#sphx-glr-auto-examples-cluster-plot-kmeans-silhouette-analysis-py
+  \end{itemize}
+\item
+  Procedure sequence trajectories plot
+\item
+  spark parallelization of bottlenecks
+
+  \begin{itemize}
+  \tightlist
+  \item
+    queries, preprocessing
+  \item
+    t-SNE
+  \item
+    clustering
+  \item
+    embedding model training?
+  \end{itemize}
+\item
+  noise contrastive estimation?
+\item
+  revisit RNN/LSTMs embeddings?
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{sqluser} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mwalton}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{dbname} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mimic}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{schema\PYZus{}name} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mimiciii}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{n}{connection} \PY{o}{=} \PY{n}{psycopg2}\PY{o}{.}\PY{n}{connect}\PY{p}{(}\PY{n}{dbname}\PY{o}{=}\PY{n}{dbname}\PY{p}{,} \PY{n}{user}\PY{o}{=}\PY{n}{sqluser}\PY{p}{)}
+        \PY{n}{cursor} \PY{o}{=} \PY{n}{connection}\PY{o}{.}\PY{n}{cursor}\PY{p}{(}\PY{p}{)}
+        \PY{n}{cursor}\PY{o}{.}\PY{n}{execute}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SET search\PYZus{}path to }\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{schema\PYZus{}name}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{query} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}\PY{l+s+s1}{SELECT subject\PYZus{}id, hadm\PYZus{}id, seq\PYZus{}num, procedures\PYZus{}icd.icd9\PYZus{}code, d\PYZus{}icd\PYZus{}procedures.short\PYZus{}title, d\PYZus{}icd\PYZus{}procedures.long\PYZus{}title}
+        \PY{l+s+s1}{        FROM procedures\PYZus{}icd}
+        \PY{l+s+s1}{        LEFT OUTER JOIN d\PYZus{}icd\PYZus{}procedures ON (procedures\PYZus{}icd.icd9\PYZus{}code = d\PYZus{}icd\PYZus{}procedures.icd9\PYZus{}code)}
+        \PY{l+s+s1}{        }\PY{l+s+s1}{\PYZsq{}\PYZsq{}\PYZsq{}}
+        
+        \PY{n}{procedures} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}sql\PYZus{}query}\PY{p}{(}\PY{n}{query}\PY{p}{,} \PY{n}{connection}\PY{p}{)}
+        \PY{n}{procedures\PYZus{}seq} \PY{o}{=} \PY{n}{procedures}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hadm\PYZus{}id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seq\PYZus{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+        \PY{n}{procedures\PYZus{}seq}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}         hadm\_id  seq\_num  subject\_id icd9\_code               short\_title  \textbackslash{}
+        0        154460        3       62641      3404   Insert intercostal cath   
+        1        130856        1        2592      9671  Cont inv mec ven <96 hrs   
+        2        130856        2        2592      3893           Venous cath NEC   
+        3        119355        1       55357      9672  Cont inv mec ven 96+ hrs   
+        4        119355        2       55357      0331                Spinal tap   
+        5        119355        3       55357      3893           Venous cath NEC   
+        6        158060        1        9545       034  Excis spinal cord lesion   
+        7        189217        1       28600      3613  Aortocor bypas-3 cor art   
+        8        189217        2       28600      3615  1 int mam-cor art bypass   
+        9        189217        3       28600      3961   Extracorporeal circulat   
+        10       115444        1       16994      3601                      None   
+        11       115444        2       16994      3606   Ins nondrug elut cor st   
+        12       115444        3       16994      3723   Rt/left heart card cath   
+        13       115444        4       16994      8856  Coronar arteriogr-2 cath   
+        14       115444        5       16994      9671  Cont inv mec ven <96 hrs   
+        15       115444        6       16994      9915   Parent infus nutrit sub   
+        16       186290        1       13579      3612  Aortocor bypas-2 cor art   
+        17       186290        2       13579      3615  1 int mam-cor art bypass   
+        18       186290        3       13579      3961   Extracorporeal circulat   
+        19       186290        4       13579      3723   Rt/left heart card cath   
+        20       186290        5       13579      8856  Coronar arteriogr-2 cath   
+        21       186290        6       13579      8853  Lt heart angiocardiogram   
+        22       101133        1       18395      0159      Other brain excision   
+        23       140708        1        9090      4399     Total gastrectomy NEC   
+        24       140708        2        9090      4254  Thorac esophagoenter NEC   
+        25       140708        3        9090      4413           Gastroscopy NEC   
+        26       140708        4        9090      4639           Enterostomy NEC   
+        27       109107        1       18649      4562  Part sm bowel resect NEC   
+        28       109107        2       18649      4651    Sm bowel stoma closure   
+        29       109107        3       18649      9915   Parent infus nutrit sub   
+        {\ldots}         {\ldots}      {\ldots}         {\ldots}       {\ldots}                       {\ldots}   
+        240065   137690        3       84107       966   Entral infus nutrit sub   
+        240066   137690        4       84107      3893           Venous cath NEC   
+        240067   102460        1       41035      3228   Endosc destruc lung les   
+        240068   102460        2       41035      3201  Endosc destruc bronc les   
+        240069   193117        1       51301      0066                      PTCA   
+        240070   193117        2       51301      3606   Ins nondrug elut cor st   
+        240071   193117        3       51301      0045   Insert 1 vascular stent   
+        240072   193117        4       51301      0040      Procedure-one vessel   
+        240073   193117        5       51301      8856  Coronar arteriogr-2 cath   
+        240074   193117        6       51301      3893           Venous cath NEC   
+        240075   193117        7       51301      3891  Arterial catheterization   
+        240076   193117        8       51301      9920  Inj/inf platelet inhibit   
+        240077   176399        1       96777      9914  Injct/inf immunoglobulin   
+        240078   176399        2       96777      9915   Parent infus nutrit sub   
+        240079   176399        3       96777      3324   Closed bronchial biopsy   
+        240080   130340        1       77242      3897  CV cath plcmt w guidance   
+        240081   130340        2       77242      3897  CV cath plcmt w guidance   
+        240082   180323        1       42694      0206   Cranial osteoplasty NEC   
+        240083   180323        2       42694      0123    Reopen craniotomy site   
+        240084   180323        3       42694      9912      Allergy immunization   
+        240085   169041        1       51519      0159      Other brain excision   
+        240086   150871        1       67415      3523  Opn/oth rep mtrl vlv-tis   
+        240087   150871        2       67415      3733  Exc/dest hrt lesion open   
+        240088   150871        3       67415      3961   Extracorporeal circulat   
+        240089   150871        4       67415      3727           Cardiac mapping   
+        240090   150871        5       67415      3736    Exc,destrct,exclus LAA   
+        240091   150871        6       67415      3893           Venous cath NEC   
+        240092   150871        7       67415      8872       Dx ultrasound-heart   
+        240093   150871        8       67415      3893           Venous cath NEC   
+        240094   150871        9       67415      3722   Left heart cardiac cath   
+        
+                                                       long\_title  
+        0          Insertion of intercostal catheter for drainage  
+        1       Continuous invasive mechanical ventilation for{\ldots}  
+        2        Venous catheterization, not elsewhere classified  
+        3       Continuous invasive mechanical ventilation for{\ldots}  
+        4                                              Spinal tap  
+        5        Venous catheterization, not elsewhere classified  
+        6       Excision or destruction of lesion of spinal co{\ldots}  
+        7       (Aorto)coronary bypass of three coronary arteries  
+        8          Single internal mammary-coronary artery bypass  
+        9       Extracorporeal circulation auxiliary to open h{\ldots}  
+        10                                                   None  
+        11      Insertion of non-drug-eluting coronary artery {\ldots}  
+        12      Combined right and left heart cardiac catheter{\ldots}  
+        13             Coronary arteriography using two catheters  
+        14      Continuous invasive mechanical ventilation for{\ldots}  
+        15      Parenteral infusion of concentrated nutritiona{\ldots}  
+        16        (Aorto)coronary bypass of two coronary arteries  
+        17         Single internal mammary-coronary artery bypass  
+        18      Extracorporeal circulation auxiliary to open h{\ldots}  
+        19      Combined right and left heart cardiac catheter{\ldots}  
+        20             Coronary arteriography using two catheters  
+        21             Angiocardiography of left heart structures  
+        22      Other excision or destruction of lesion or tis{\ldots}  
+        23                                Other total gastrectomy  
+        24                Other intrathoracic esophagoenterostomy  
+        25                                      Other gastroscopy  
+        26                                      Other enterostomy  
+        27             Other partial resection of small intestine  
+        28                    Closure of stoma of small intestine  
+        29      Parenteral infusion of concentrated nutritiona{\ldots}  
+        {\ldots}                                                   {\ldots}  
+        240065  Enteral infusion of concentrated nutritional s{\ldots}  
+        240066   Venous catheterization, not elsewhere classified  
+        240067  Endoscopic excision or destruction of lesion o{\ldots}  
+        240068  Endoscopic excision or destruction of lesion o{\ldots}  
+        240069  Percutaneous transluminal coronary angioplasty{\ldots}  
+        240070  Insertion of non-drug-eluting coronary artery {\ldots}  
+        240071                    Insertion of one vascular stent  
+        240072                         Procedure on single vessel  
+        240073         Coronary arteriography using two catheters  
+        240074   Venous catheterization, not elsewhere classified  
+        240075                           Arterial catheterization  
+        240076        Injection or infusion of platelet inhibitor  
+        240077            Injection or infusion of immunoglobulin  
+        240078  Parenteral infusion of concentrated nutritiona{\ldots}  
+        240079             Closed [endoscopic] biopsy of bronchus  
+        240080    Central venous catheter placement with guidance  
+        240081    Central venous catheter placement with guidance  
+        240082                          Other cranial osteoplasty  
+        240083                       Reopening of craniotomy site  
+        240084                           Immunization for allergy  
+        240085  Other excision or destruction of lesion or tis{\ldots}  
+        240086  Open and other replacement of mitral valve wit{\ldots}  
+        240087  Excision or destruction of other lesion or tis{\ldots}  
+        240088  Extracorporeal circulation auxiliary to open h{\ldots}  
+        240089                                    Cardiac mapping  
+        240090  Excision, destruction, or exclusion of left at{\ldots}  
+        240091   Venous catheterization, not elsewhere classified  
+        240092                     Diagnostic ultrasound of heart  
+        240093   Venous catheterization, not elsewhere classified  
+        240094                 Left heart cardiac catheterization  
+        
+        [240095 rows x 6 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{procedures}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{seq\PYZus{}num}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} <matplotlib.axes.\_subplots.AxesSubplot at 0x1a191ff9b0>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{vocab\PYZus{}size} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{unique}\PY{p}{(}\PY{n}{procedures}\PY{o}{.}\PY{n}{icd9\PYZus{}code}\PY{p}{)}\PY{o}{.}\PY{n}{size}
+        \PY{n}{data}\PY{p}{,} \PY{n}{counts}\PY{p}{,} \PY{n}{dictionary}\PY{p}{,} \PY{n}{inverse\PYZus{}dict} \PY{o}{=} \PY{n}{build\PYZus{}sequences}\PY{p}{(}\PY{n}{procedures}\PY{p}{,}
+                                                                 \PY{n}{vocab\PYZus{}size}\PY{p}{,}
+                                                                 \PY{n}{min\PYZus{}seq\PYZus{}len}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Maximum likelihood
+estimation}\label{maximum-likelihood-estimation}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{build\PYZus{}dataset}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{vocab\PYZus{}size}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{one\PYZus{}hot}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{embedding\PYZus{}dim} \PY{o}{=} \PY{l+m+mi}{32}
+         \PY{n}{nb\PYZus{}epoch} \PY{o}{=} \PY{l+m+mi}{10}
+         \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{64}
+         
+         \PY{n}{x} \PY{o}{=} \PY{n}{Input}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{vocab\PYZus{}size} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,}\PY{p}{)}\PY{p}{)}
+         \PY{n}{embedding} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{n}{embedding\PYZus{}dim}\PY{p}{)}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+         \PY{n}{y\PYZus{}pred} \PY{o}{=} \PY{n}{Dense}\PY{p}{(}\PY{n}{vocab\PYZus{}size} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{activation}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{softmax}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{(}\PY{n}{embedding}\PY{p}{)}
+         \PY{n}{model} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y\PYZus{}pred}\PY{p}{)}
+         \PY{n}{model}\PY{o}{.}\PY{n}{compile}\PY{p}{(}\PY{n}{optimizer}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{adam}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{loss}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{categorical\PYZus{}crossentropy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{hist} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{nb\PYZus{}epoch}\PY{o}{=}\PY{n}{nb\PYZus{}epoch}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/mwalton/miniconda3/envs/gatech/lib/python3.6/site-packages/ipykernel/\_\_main\_\_.py:1: UserWarning: The `nb\_epoch` argument in `fit` has been renamed `epochs`.
+  if \_\_name\_\_ == '\_\_main\_\_':
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Epoch 1/10
+370770/370770 [==============================] - 71s 193us/step - loss: 4.4935
+Epoch 2/10
+370770/370770 [==============================] - 70s 189us/step - loss: 3.9503
+Epoch 3/10
+370770/370770 [==============================] - 69s 187us/step - loss: 3.8403
+Epoch 4/10
+370770/370770 [==============================] - 69s 185us/step - loss: 3.7891
+Epoch 5/10
+370770/370770 [==============================] - 68s 185us/step - loss: 3.7588
+Epoch 6/10
+370770/370770 [==============================] - 69s 186us/step - loss: 3.7376
+Epoch 7/10
+370770/370770 [==============================] - 68s 183us/step - loss: 3.7216
+Epoch 8/10
+370770/370770 [==============================] - 71s 192us/step - loss: 3.7092
+Epoch 9/10
+370770/370770 [==============================] - 70s 189us/step - loss: 3.6991
+Epoch 10/10
+370770/370770 [==============================] - 69s 186us/step - loss: 3.6908
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{hist}\PY{o}{.}\PY{n}{history}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}48}]:} [<matplotlib.lines.Line2D at 0x1a2b311eb8>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_10_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}49}]:} \PY{n}{embed} \PY{o}{=} \PY{n}{Model}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{embedding}\PY{p}{)}
+         \PY{n}{x\PYZus{}embed} \PY{o}{=} \PY{n}{embed}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{x\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{train\PYZus{}on} \PY{o}{=} \PY{l+m+mi}{1000}
+         \PY{n}{tsne} \PY{o}{=} \PY{n}{TSNE}\PY{p}{(}\PY{n}{perplexity}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{,} \PY{n}{n\PYZus{}components}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{init}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{pca}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{n\PYZus{}iter}\PY{o}{=}\PY{l+m+mi}{500}\PY{p}{)}
+         \PY{n}{low\PYZus{}dim\PYZus{}embeds} \PY{o}{=} \PY{n}{tsne}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{x\PYZus{}embed}\PY{p}{[}\PY{p}{:}\PY{n}{train\PYZus{}on}\PY{p}{,} \PY{p}{:}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{rescaled} \PY{o}{=} \PY{n}{StandardScaler}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit\PYZus{}transform}\PY{p}{(}\PY{n}{low\PYZus{}dim\PYZus{}embeds}\PY{p}{)}
+         \PY{n}{db} \PY{o}{=} \PY{n}{DBSCAN}\PY{p}{(}\PY{n}{eps}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{min\PYZus{}samples}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{rescaled}\PY{p}{)}
+         \PY{n}{labels} \PY{o}{=} \PY{n}{db}\PY{o}{.}\PY{n}{labels\PYZus{}}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{rescaled}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n}{rescaled}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{labels}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}81}]:} <matplotlib.collections.PathCollection at 0x1a2d6b6780>
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Noise Contrastive
+Estimation}\label{noise-contrastive-estimation}
+
+see: - https://www.tensorflow.org/tutorials/word2vec -
+https://github.com/tensorflow/tensorflow/blob/r1.4/tensorflow/examples/tutorials/word2vec/word2vec\_basic.py
+-
+https://datascience.stackexchange.com/questions/13216/intuitive-explanation-of-noise-contrastive-estimation-nce-loss
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{x\PYZus{}train}\PY{p}{,} \PY{n}{y\PYZus{}train} \PY{o}{=} \PY{n}{build\PYZus{}dataset}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{n}{vocab\PYZus{}size}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{one\PYZus{}hot}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{c+c1}{\PYZsh{} construct the skip\PYZhy{}gram model using noise contrastive estimation (NCE)}
+        \PY{n}{embedding\PYZus{}dim} \PY{o}{=} \PY{l+m+mi}{2}
+        \PY{n}{num\PYZus{}sampled} \PY{o}{=} \PY{l+m+mi}{64} \PY{c+c1}{\PYZsh{} Noise samples per positive example}
+        \PY{n}{nb\PYZus{}iter} \PY{o}{=} \PY{l+m+mi}{1000}
+        \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{128}
+        
+        \PY{n}{graph} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Graph}\PY{p}{(}\PY{p}{)}
+        \PY{k}{with} \PY{n}{graph}\PY{o}{.}\PY{n}{as\PYZus{}default}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+            \PY{n}{x} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{)}\PY{p}{)}
+            \PY{n}{y} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{e\PYZus{}params} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}uniform}\PY{p}{(}\PY{p}{[}\PY{n}{vocab\PYZus{}size} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{embedding\PYZus{}dim}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{l+m+mf}{1.0}\PY{p}{)}\PY{p}{)}
+            \PY{n}{embedding} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{embedding\PYZus{}lookup}\PY{p}{(}\PY{n}{e\PYZus{}params}\PY{p}{,} \PY{n}{x}\PY{p}{)}
+        
+            \PY{n}{W} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{truncated\PYZus{}normal}\PY{p}{(}\PY{p}{[}\PY{n}{vocab\PYZus{}size} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{stddev}\PY{o}{=}\PY{l+m+mf}{1.0} \PY{o}{/} \PY{n}{np}\PY{o}{.}\PY{n}{sqrt}\PY{p}{(}\PY{n}{embedding\PYZus{}dim}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{n}{b} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{Variable}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{p}{[}\PY{n}{vocab\PYZus{}size} \PY{o}{+} \PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{loss} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{nce\PYZus{}loss}\PY{p}{(}\PY{n}{W}\PY{p}{,} \PY{n}{b}\PY{p}{,} \PY{n}{labels}\PY{o}{=}\PY{n}{y}\PY{p}{,}
+                                                 \PY{n}{inputs}\PY{o}{=}\PY{n}{embedding}\PY{p}{,}
+                                                 \PY{n}{num\PYZus{}sampled}\PY{o}{=}\PY{n}{num\PYZus{}sampled}\PY{p}{,}
+                                                 \PY{n}{num\PYZus{}classes}\PY{o}{=}\PY{n}{vocab\PYZus{}size}\PY{o}{+}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        
+            \PY{n}{optimizer} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{GradientDescentOptimizer}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{)}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{loss}\PY{p}{)}
+        
+            \PY{n}{init} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
