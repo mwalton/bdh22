@@ -1,3 +1,5 @@
 mimic-data/
 secure_env/
 mimic-code/
+*.csv
+*.tsv
